@@ -1,61 +1,32 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import * as auth from '../utils/auth.js';
-import Header from './Header.js';
-import Main from './Main.js';
+import React from "react";
+import Header from "./Header.js";
+import AuthPage from "./AuthPage.js";
 
-const Login = ({ onLogin, handleTooltipOpen, handleSuccess }) => {
-
-  const [formValue, setFormValue] = React.useState({
-    email: '',
-    password: ''
-  })
-
-  const navigate = useNavigate();
-
-  const handleChange = (e) => {
-    const {name, value} = e.target;
-
-    setFormValue({
-      ...formValue,
-      [name]: value
-    });
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!formValue.email || !formValue.password){
-      return;
-    }
-    auth.authorize(formValue.email, formValue.password, handleTooltipOpen, handleSuccess)
-      .then((data) => {
-        if (data.token){
-          setFormValue({email: '', password: ''});
-          onLogin();
-          navigate('/', {replace: true});
-        }
-      })
-      .catch((err) => { 
-        console.log(err)
-      });
-  } 
-
+const Login = ({
+  clearFormValues,
+  handleChange,
+  handleSubmitAuth,
+  formValues,
+  setFormValues,
+}) => {
   return (
     <>
-      <Header 
-        title={'Регистрация'}
-        link={'/sign-up'}
+      <Header
+        title={"Регистрация"}
+        link={"/sign-up"}
+        setFormValues={setFormValues}
+        clearFormValues={clearFormValues}
       />
 
-      <Main 
-        handleSubmit={ handleSubmit }
-        handleChange={ handleChange }
-        formValue={ formValue }
-        title={ 'Вход' }
-        buttonText={ 'Войти' }
+      <AuthPage
+        handleSubmit={handleSubmitAuth}
+        handleChange={handleChange}
+        formValues={formValues}
+        title={"Вход"}
+        buttonText={"Войти"}
       />
     </>
-  )
-}
+  );
+};
 
 export default Login;

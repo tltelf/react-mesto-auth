@@ -53,7 +53,7 @@
 @import url('./blocks/popup/__container-form-button/_inactive/popup__container-form-button_inactive.css');
 @import url('./blocks/popup/__container-form-button/_auth/popup__container-form-button_auth.css');
 @import url('./blocks/popup/__button-close/popup__button-close.css');
-@import url('./blocks/popup/__container-photo-place/popup__container-photo-place.css');
+@import url('./blocks/popup/__container/_photo-place/popup__container_photo-place.css');
 @import url('./blocks/popup/__img-photo-place/popup__img-photo-place.css');
 @import url('./blocks/popup/__container-title-photo-place/popup__container-title-photo-place.css');
 @import url('./blocks/popup/_photo-place/popup_photo-place.css');

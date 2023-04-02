@@ -1,59 +1,35 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import * as auth from '../utils/auth.js';
-import Header from './Header.js';
-import Main from './Main.js';
+import React from "react";
+import { Link } from "react-router-dom";
+import Header from "./Header.js";
+import AuthPage from "./AuthPage.js";
 
-const Register = ({ handleTooltipOpen, handleSuccess }) => {
-
-  const [formValue, setFormValue] = React.useState({
-    email: '',
-    password: ''
-  })
-
-  const navigate = useNavigate();
-
-  const handleChange = (e) => {
-    const {name, value} = e.target;
-
-    setFormValue({
-      ...formValue,
-      [name]: value
-    })
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    auth.register(formValue.email, formValue.password, handleTooltipOpen, handleSuccess)
-    .then((res) => {
-      if (res.ok) {
-        navigate('/sign-in', {replace: true})
-      }
-    })
-  }
-
+const Register = ({
+  handleChange,
+  handleSubmitRegister,
+  formValues,
+  clearFormValues,
+}) => {
   return (
-  <>
-    <Header 
-      title={'Войти'}
-      link={'/sign-in'}
-    />
+    <>
+      <Header
+        title={"Войти"}
+        link={"/sign-in"}
+        clearFormValues={clearFormValues}
+      />
 
-    <Main 
-      handleSubmit={ handleSubmit }
-      handleChange={ handleChange }
-      formValue={ formValue }
-      title={ 'Регистрация' }
-      buttonText={ 'Зарегистрироваться' }
-    >
-      <Link 
-        to='/sign-in' 
-        className="auth__link">
-        Уже зарегистрированы? Войти
-      </Link>
-    </Main>
-  </> 
-  )
-}
+      <AuthPage
+        handleSubmit={handleSubmitRegister}
+        handleChange={handleChange}
+        formValues={formValues}
+        title={"Регистрация"}
+        buttonText={"Зарегистрироваться"}
+      >
+        <Link onClick={clearFormValues} to="/sign-in" className="auth__link">
+          Уже зарегистрированы? Войти
+        </Link>
+      </AuthPage>
+    </>
+  );
+};
 
 export default Register;
