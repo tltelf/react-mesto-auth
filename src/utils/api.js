@@ -46,9 +46,7 @@ class Api {
       return this._request(`/cards/${id}/likes`, {
         method: "DELETE",
         headers: this._headers,
-      }).then((res) => {
-        return this._checkResponse(res);
-      });
+      })
     } else {
       return this._request(`/cards/${id}/likes`, {
         method: "PUT",
